@@ -14,7 +14,7 @@ async function registerUser(userData: UserData) {
 
 async function findUser(email: string) {
     return await getUserByEmail(email);
-}
+};
 
 const authService = {
     registerUser,
