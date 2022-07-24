@@ -29,8 +29,19 @@ async function addTest(testData: DecompoundedTestDataWithoutIds) {
     await insertTest(testDataToInsert);
 };
 
+async function getTests(groupBy) {
+    if (groupBy === "disciplines") {
+        return [];
+    };
+    if (groupBy === "teachers") {
+        return [];
+    };
+    throwError(true, "Not Acceptable", `Invalid link`);
+};
+
 const testService = {
-    addTest
+    addTest,
+    getTests
 };
 
 export default testService;

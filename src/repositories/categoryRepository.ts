@@ -11,3 +11,7 @@ export async function getCategoryByName(name: string) {
         }
     });
 };
+
+export async function getAllCategories() {
+    return await prisma.category.findMany();
+}
