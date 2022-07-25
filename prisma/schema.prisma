@@ -28,19 +28,19 @@ model Term {
 }
 
 model Discipline {
-  id                Int                 @id @default(autoincrement())
-  name              String              @unique
-  termId            Int
-  terms             Term                @relation(fields: [termId], references: [id])
-  TeacherDiscipline TeacherDiscipline[]
+  id                 Int                 @id @default(autoincrement())
+  name               String              @unique
+  termId             Int
+  term               Term                @relation(fields: [termId], references: [id])
+  teacherDisciplines TeacherDiscipline[]
 
   @@map("disciplines")
 }
 
 model Teacher {
-  id                Int                 @id @default(autoincrement())
-  name              String              @unique
-  TeacherDiscipline TeacherDiscipline[]
+  id                 Int                 @id @default(autoincrement())
+  name               String              @unique
+  teacherDisciplines TeacherDiscipline[]
 
   @@map("teachers")
 }
@@ -49,10 +49,11 @@ model TeacherDiscipline {
   id           Int        @id @default(autoincrement())
   teacherId    Int
   disciplineId Int
-  teachers     Teacher    @relation(fields: [teacherId], references: [id])
-  disciplines  Discipline @relation(fields: [disciplineId], references: [id])
+  teacher      Teacher    @relation(fields: [teacherId], references: [id])
+  discipline   Discipline @relation(fields: [disciplineId], references: [id])
 
-  Test Test[]
+  tests Test[]
+
   @@map("teachersDisciplines")
 }
 
@@ -60,7 +61,8 @@ model Category {
   id   Int    @id @default(autoincrement())
   name String @unique
 
-  Test Test[]
+  tests Test[]
+
   @@map("categories")
 }
 
@@ -70,8 +72,8 @@ model Test {
   pdfUrl              String
   categoryId          Int
   teacherDisciplineId Int
-  categories          Category          @relation(fields: [categoryId], references: [id])
-  teachersDisciplines TeacherDiscipline @relation(fields: [teacherDisciplineId], references: [id])
+  category            Category          @relation(fields: [categoryId], references: [id])
+  teachersDiscipline  TeacherDiscipline @relation(fields: [teacherDisciplineId], references: [id])
 
   @@map("tests")
 }

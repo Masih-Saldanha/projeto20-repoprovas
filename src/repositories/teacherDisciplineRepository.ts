@@ -12,3 +12,21 @@ export async function getTeacherDisciplineByIds(teacherId: number, disciplineId:
         }
     });
 };
+
+export async function getAllTestsByTeacherDisciplines() {
+    return await prisma.teacherDiscipline.findMany({
+        include: {
+            discipline: {
+                include: {
+                    term: {}
+                }
+            },
+            teacher: {},
+            tests: {
+                include: {
+                    category: {}
+                }
+            }
+        }
+    });
+};

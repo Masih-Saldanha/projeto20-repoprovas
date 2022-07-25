@@ -1,10 +1,12 @@
 import { getCategoryByName } from "../repositories/categoryRepository.js";
 import { getDisciplineByName } from "../repositories/disciplineRepository.js";
-import { getTeacherDisciplineByIds } from "../repositories/teacherDisciplineRepository.js";
+import { getAllTestsByTeacherDisciplines, getTeacherDisciplineByIds } from "../repositories/teacherDisciplineRepository.js";
 import { getTeacherByName } from "../repositories/teacherRepository.js";
+import { getAllTestsByDisciplines } from "../repositories/termRepository.js";
 import { insertTest } from "../repositories/testRepository.js";
 import { DecompoundedTestDataWithoutIds } from "../schemas/testSchema.js";
 import { throwError } from "../utils/errorTypeUtils.js";
+
 
 async function addTest(testData: DecompoundedTestDataWithoutIds) {
     const findCategory = await getCategoryByName(testData.category);
@@ -31,10 +33,10 @@ async function addTest(testData: DecompoundedTestDataWithoutIds) {
 
 async function getTests(groupBy) {
     if (groupBy === "disciplines") {
-        return [];
+        return await getAllTestsByDisciplines();
     };
     if (groupBy === "teachers") {
-        return [];
+        return await getAllTestsByTeacherDisciplines();
     };
     throwError(true, "Not Acceptable", `Invalid link`);
 };
