@@ -3,3 +3,4 @@ node_modules
 dist
 repoprovas-front
 links.txt
+.env.test
